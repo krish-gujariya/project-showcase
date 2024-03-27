@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cell{
+            border: 1px solid;
+            height: 50px;
+            width: 50px;
+            font-size: 35px;
+        }
+        .box{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            width: 150px;
+            height: 150px;
+            margin: auto;
+        }
+        .game{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="game">
+        <h1>TIC TAC TOE</h1>
+        <h2>Single Player</h2>
+        <div class="box">
+            <div class="cell" cellIndex="0"></div>
+            <div class="cell" cellIndex="1"></div>
+            <div class="cell" cellIndex="2"></div>
+            <div class="cell" cellIndex="3"></div>
+            <div class="cell" cellIndex="4"></div>
+            <div class="cell" cellIndex="5"></div>
+            <div class="cell" cellIndex="6"></div>
+            <div class="cell" cellIndex="7"></div>
+            <div class="cell" cellIndex="8"></div>
+        </div>
+        <h2 id="mess">Status Message</h2>
+        <button id="restartBtn">Restart</button>
+    </div>
+
+    <script>
+        const cells = document.querySelectorAll(".cell");
+        const btn = document.querySelector("#restartBtn");
+        const message =  document.getElementById("mess");
+        let opt = ["","","","","","","","",""];
+        let oponent =["0","1","2","3","4","5","6","7","8"];
+
+        let wincd = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [2,4,6]
+        ];
+
+        function random(number) {
+            return Math.floor(Math.random() * (number + 1));
+        }
+
+        let currentPlayer = "O";
+        let runn = false
+        initializeGame();
+
+        function initializeGame(){
+            cells.forEach(cell => 
+                cell.addEventListener('click', cellClicked));
+            btn.addEventListener('click', restartGame);
+            message.innerHTML= currentPlayer+"'s turn";
+            runn = true;
+        }
+        
+        function cellClicked(){
+            if(!runn){
+                return false;
+            }
+            let cellindex = this.getAttribute("cellIndex");
+            if(opt[cellindex]!=""){
+                return;
+            }
+            else{
+                cellUpdate(this,cellindex);
+            }
+            
+        }
+
+        function cellUpdate(cell,index){
+            cell.innerHTML = currentPlayer;
+            opt[index] = currentPlayer;
+            let gh = oponent.indexOf(index);
+            
+            if(gh > -1){
+                oponent.splice(gh,1);
+            }
+            wincheck();            
+        }
+        
+        function changePlayer(){
+            currentPlayer = (currentPlayer=== "X") ? "O" :"X";
+            message.innerHTML= currentPlayer+"'s turn";   
+            if(currentPlayer =="X"){
+               setTimeout(compselect,300); 
+            }
+        }
+
+        function compselect(){
+            if(!runn){
+                return false;
+            }
+            let ladki = random(oponent.length-1);
+            let cellindex = oponent.at(ladki);
+            let dg = oponent.indexOf(cellindex.toString());
+            if(dg> -1){
+                oponent.splice(dg,1);
+            }
+            if(opt[cellindex]!=""){
+                return ;
+            }
+            else{
+                computer(cellindex);
+            }
+            
+        }
+
+        function computer(cellindex){
+            message.innerHTML= currentPlayer+"'s turn";
+            cells[cellindex].innerHTML = currentPlayer;
+            opt[cellindex] = currentPlayer;
+            wincheck();
+
+
+        }
+
+        function wincheck(){
+            let win = false;
+            for(let i =0; i<wincd.length; i++){
+                const cond = wincd[i];
+                let A = opt[cond[0]];
+                let B = opt[cond[1]];
+                let C = opt[cond[2]];
+
+                if(A==""|| B==""||C==""){
+                    continue;
+                }
+
+                if(A==B && B==C){
+                    win = true;
+                    break;
+                }
+
+            }
+                if(win){
+                    message.innerHTML = currentPlayer+" win";
+                    runn = false;
+                    return false;
+                }
+
+                else if(!opt.includes("")){
+                    message.innerHTML = "Draw";
+                    runn = false;
+                    return false;
+                }
+
+                else{
+                    changePlayer();
+                }
+
+
+        }
+
+        function restartGame(){
+
+            opt = ["","","","","","","","",""];
+            oponent =["0","1","2","3","4","5","6","7","8"];
+            currentPlayer = "O"
+            message.innerHTML = currentPlayer+"'s turn";
+            cells.forEach(cell => {
+                cell.innerHTML = "";
+                runn = true;
+            });
+
+        }
+
+    </script>
+
+
+
+</body>
+</html>

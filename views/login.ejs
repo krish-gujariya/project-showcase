@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Registeration.css">
+    <title>Document</title>
+    <style>
+        
+.form {
+    background-image: url(imags/peakpx.jpg) ; 
+    background-size: 100% 100%;
+    padding: 32px;
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <div class="form">
+        <form id="form">
+            <div class="box">
+                <h2>Login</h2>
+
+                <div>
+                    <label for="uname">Username</label>
+                    <input type="text" name="uname" id="uname" placeholder="Enter your Username" />
+                    <i class="fa-solid fa-exclamation failure-icon"></i>
+                    <i class="fa-solid fa-check success-icon"></i>
+
+                    <div class="error"></div>
+                </div>
+
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter your password">
+                    <i class="fa-solid fa-exclamation failure-icon"></i>
+                    <i class="fa-solid fa-check success-icon"></i>
+
+                    <div class="error"></div>
+
+                </div>
+                <div class="submit" id="submit">
+                    <button type="button" id="submit-btn">LOGIN</button>
+                </div>
+                <div class="forgot">
+                    <p style="display: inline;">Dont have account?</p> <a href="/register">Register here</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="javascript/login.js"></script>
+</html>

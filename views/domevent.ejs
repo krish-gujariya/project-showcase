@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #id2 {
+            width: 100px;
+        }
+
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        
+        table td {
+            width: 150px;
+            height: 150px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        div {
+            border: 1px solid black;
+            height: 150px;
+            width: auto;
+        }
+    </style>
+</head>
+
+<body onresize="function10()" onload="function8()" onunload="function9(this)">
+    <h1>Event & Event Listner of JavaScript</h1>
+    <table border="2px">
+        <tr class="odd">
+            <td rowspan="2">Input Events</td>
+            <td id="id2">OnClick
+                <button id="d1" onclick="change()">Click Me</button>
+            </td>
+            <td>
+                <label for="blur">OnBlur</label>
+                <input type="text" name="onblur" id="blur" onblur="oblr()">
+            </td>
+            <td id="oncg">
+                <label for="oncg">On Change</label>
+                <input type="text" name="oncg" onchange="oncg()" value="Lorem Ipsum">
+            </td>
+
+            <td>
+                <label>On Change (Drop Down Box)</label>
+                <select name="oncg2" id="oncg2" onchange="oncg2()">
+                    <option value="Drop">Drop</option>
+                    <option value="Down">Down</option>
+                    <option value="Box">Box</option>
+                </select>
+            </td>
+
+            <td id="onfcs">
+                <label for="onfcs">On Focus</label>
+                <input type="text" name="onfcs" onfocus="onfcs()">
+            </td>
+        </tr>
+        <tr class="even">
+            <td id="onslct">
+                <label>On Select</label>
+                <input type="text" onselect="onslct()" value="Select this text" readonly>
+            </td>
+
+            <td id="submit">
+                <form onsubmit="onsmbt()" onreset="onrest()">
+                    On Submit & On Reset
+                    <input type="submit" value="SUBMIT">
+                    <input type="reset" value="RESET">
+                </form>
+            </td>
+
+            <td id="td1">
+                <p>onkeydown & on onkeyup</p>
+                <input type="text" onkeydown="function1()" onkeyup="function1()">
+            </td>
+
+            <td id="td2">
+                <p>onkeypress</p>
+                <input type="text" onkeypress="function2()">
+            </td>
+        </tr>
+
+        <tr class="odd">
+            <td>Mouse events</td>
+            <td>
+                <p> Mouse Over & Mouse Out</p>
+                <p id="td3" onmouseover="function3()" onmouseout="function4()">Mouse Over this Text</p>
+            </td>
+
+            <td>
+                <p>On Mouse Down & on mouse up</p>
+                <p id="p1" onmousedown="function5(this, 'blue')" onmouseup="function5(this, 'green')">Click this text
+                </p>
+            </td>
+
+            <td>
+                <div onmousemove="function6(event)" onmouseout="function7()">
+                    <span>Move mouse in this area</span><br>
+                    <span id="sp1"></span>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Click Events</td>
+            <td>OnClick && Double Click
+                <label for="">Counter</label>
+                <input type="number" id="inpt1" value="0">
+                <button onmousedown="counter()">+</button>
+                <button ondblclick="erase()">Double Click to reset</button>
+            </td>
+            <td>
+                <p id="demo"></p>
+            </td>
+        </tr>
+    </table>
+    <script>
+
+        function random(number) {
+            return Math.floor(Math.random() * (number + 1));
+        }
+
+
+        function change() {
+            const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            document.getElementById('id2').style.backgroundColor = rndCol;
+        }
+
+        function oblr() {
+
+            const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            document.getElementById('blur').style.background = rndCol;
+        }
+
+        function oncg() {
+            const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            const d1 = document.getElementById('oncg');
+            d1.style.background = rndCol;
+            // alert("You change value of "+d1);
+        }
+
+        function oncg2() {
+            let d2 = document.getElementById('oncg2').value;
+            alert('You Prefered ' + d2 + " Option");
+
+        }
+
+        function onfcs() {
+            const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            document.getElementById('onfcs').style.background = rndCol;
+        }
+
+        function onslct() {
+            const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            document.getElementById('onslct').style.background = rndCol;
+        }
+
+        function onsmbt() {
+            alert("Form is submitted");
+        }
+        function onrest() {
+            alert("Form is reset");
+        }
+
+        function function1() {
+            const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            document.getElementById("td1").style.background = rndCol;
+
+        }
+
+        function function2() {
+            const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            document.getElementById("td2").style.background = rndCol;
+
+        }
+
+        function function3() {
+            const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            document.getElementById("td3").style.color = rndCol;
+
+        }
+
+        function function4() {
+            document.getElementById("td3").style.color = "black";
+
+        }
+
+        function function5(elemnt, colr) {
+            elemnt.style.color = colr;
+        }
+
+        function function6(e) {
+            let x = e.clientX;
+            let y = e.clientY;
+            Cd = "Coordinates w.r.t. Screen: (" + x + " , " + y + " )";
+            document.getElementById('sp1').innerHTML = Cd;
+
+        }
+
+        function function7() {
+            document.getElementById('sp1').innerHTML = '';
+
+        }
+
+        let count = document.getElementById('inpt1').value;
+        function counter() {
+            let db = count++;
+            document.getElementById('inpt1').value = db;
+        }
+
+        function erase() {
+            document.getElementById('inpt1').value = 0;
+            count = 0;
+        }
+        function function8() {
+            // const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            // document.body.style.backgroundColor = rndCol;
+        }
+
+        function function9(scope) {
+            const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+            document.body.style.backgroundColor = rndCol;
+
+        }
+
+        function function10() {
+            // alert("this is resize");
+            let w = window.outerWidth;
+            let h = window.outerHeight;
+            let txt = "Window size: width=" + w + ", height=" + h;
+            document.getElementById("demo").innerHTML = txt;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        button{
+            width: 70px;
+        }
+
+        table {
+            border: 2px solid black;
+            margin: auto;
+        }
+
+        
+        td {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+        }
+        
+        .dark{
+            background-color: rgb(233, 40, 40);
+        }
+        
+        .light{
+            background-color: rgba(233, 40, 40, 0.5);
+
+        }
+
+        p{
+            text-align: center;
+        }
+        #gkg{ 
+            margin: auto;
+            margin-bottom: 10px;
+            width: 60px;
+            font-size: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 4px;
+            background: rgb(164, 242, 63);
+            border: 2px solid black;
+            
+        }
+        h1{
+            text-align: center;
+        }
+
+        p,span{
+            font-size: 30px;
+        }
+
+        .scoreboard{
+            margin: auto;
+            text-align: center;
+            width: 40%;
+            font-size: 30px;
+            padding: 4px;
+        }
+        
+        body{
+            background-color: blanchedalmond;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <h1>Assignment 2</h1>
+    <p >Score:- <span id="score">00</span></p>
+    <div id="gkg">00</div>
+    <!-- <button onclick="addcol()">ADD COLUMN</button> -->
+    <!-- <button onclick="coldel()">Delete Column</button> -->
+    <table id="myTable" border="1px">
+        <tr id="r1">
+            <td id="td0" class="dark" onclick="wrongclick()"></td>
+            <td id="td1" class="dark" onclick="wrongclick()"></td>
+        </tr>
+        <tr id="r2">
+            <td id="td2" class="light" onclick="rightclick()"></td>
+            <td id="td3" class="dark" onclick="wrongclick()"></td>
+        </tr>
+    </table>
+    <div class ="scoreboard">
+        <!-- Your Score is 100 -->
+    </div>
+    <!-- <button onclick="rowadd()">Row Incremnet</button> -->
+    <!-- <button onclick="delrow()">Delete Row</button> -->
+    <script>
+        
+        // Right Click 
+        
+        clkwrk();
+
+        let scr = 0;
+        function rightclick(){
+            scr = scr +5;
+            document.getElementById('score').innerHTML = scr;
+            addboth();
+        }
+        
+        // Wrong Click
+        function wrongclick(){
+            scr = scr - 2.5;
+            clrrnd();
+            setnewrnd();
+            document.getElementById('score').innerHTML = scr;
+        }
+        
+        function random(number) {
+            return Math.floor(Math.random() * (number + 1));
+        }
+        
+
+        function clkwrk(){
+        let tt = 13;
+        const dg = setInterval(clockwalk, 1000);
+
+        function clockwalk(){
+                    tt--;
+                    document.getElementById("gkg").innerHTML = tt;   
+
+                
+                if(tt<= 9){
+                    document.getElementById("gkg").innerHTML = "0"+(tt);
+                    document.getElementById("gkg").style.color = 'red'; 
+                    document.getElementById("gkg").style.background = "white";  
+
+                }
+                
+                if(tt==0) {
+                    clearInterval(dg);
+                    document.getElementById("myTable").remove();
+                    showscore();
+                }
+
+
+        }
+
+    }
+
+    // Showing score
+    function showscore(){
+       let gf= document.getElementsByClassName("scoreboard");
+         gf[0].style.border = "2px solid black";
+         gf[0].innerHTML = "Your Score is:- "+scr;       
+    }
+
+        
+    // Clear random value    
+        function clrrnd(){
+            document.getElementById('td'+cnf).style.opacity = 1.0;
+            document.getElementById('td'+cnf).setAttribute('onclick','wrongclick()');
+
+        }
+
+
+
+        function setnewrnd(){
+            const k = random(pk);
+            cnf = k;
+            let gh = document.getElementById('td'+k);
+            gh.style.opacity = 0.5;
+            gh.setAttribute('onclick', 'rightclick()');
+
+        }
+        
+        
+
+
+        let cnf = 2;
+        function addboth(){
+            let cds = document.getElementById('myTable').rows[0].cells.length;
+            // if(cds>10)
+            // {
+            //     return false;
+            // }
+            // change previous cell
+                    
+                clrrnd();
+            
+            
+            // add column
+            addcol();
+            
+            // add row
+            addrow();
+            
+            setnewrnd();
+            
+            changecolor();            
+        }
+        
+
+        // ADD rows and column
+// ------------------------------------------------------------------------------------------------
+
+        let c = document.getElementById('r2').rowIndex + 1;
+        var pk = 4;
+
+        function addrow(){
+            let w = document.getElementById('myTable').rows[0].cells.length;
+
+            if(w > 7){
+                return false;
+            }
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(c);
+            c++;
+            for (let i = 0; i < w; i++) {
+                var cell = row.insertCell(i);
+                cell.setAttribute('id', 'td'+pk);
+                cell.setAttribute('onclick', 'wrongclick()');
+                pk++;
+            }
+            
+        }
+        
+        function addcol(){
+            let w = document.getElementById('myTable').rows[0].cells.length;
+            let test = document.querySelectorAll("tr");
+
+            if(w > 10){
+                return false;
+            }
+
+            for (let j = 0; j < test.length; j++) {
+                var cell = document.createElement("td")
+                cell.setAttribute('id','td'+pk);
+                cell.setAttribute('onclick', 'wrongclick()')
+                pk++;
+                test[j].appendChild(cell);
+                
+            }
+
+        }
+// ==============================================================================================
+// color change
+
+        function changecolor(){
+            const rndCol = `rgba(${random(255)} ${random(255)} ${random(255)}`;
+            var kgf = document.getElementsByTagName("td");
+
+            for(let clr = 0; clr<kgf.length; clr++)
+            {
+                kgf[clr].style.background = rndCol;
+            }
+        }
+
+// ================================================================================================      
+        </script>
+
+</body>
+
+
+</html>

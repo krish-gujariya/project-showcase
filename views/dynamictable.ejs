@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        button{
+            width: 70px;
+        }
+
+        table {
+            border: 2px solid black;
+        }
+
+        td {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) td:nth-child(even),
+        tr:nth-child(odd) td:nth-child(odd) {
+            background-color: rgb(228, 214, 185);
+        }
+
+        tr:nth-child(odd) td:nth-child(even),
+        tr:nth-child(even) td:nth-child(odd) {
+            background-color: rgb(187, 213, 187);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Assignment 1</h1>
+    <button onclick="addcol()">ADD COLUMN</button>
+    <button onclick="coldel()">Delete Column</button>
+    <table id="myTable">
+        <tr id="r1">
+            <td class="td1"></td>
+            <td class="td2"></td>
+            <td class="td3"></td>
+        </tr>
+        <tr id="r2">
+            <td class="td1"></td>
+            <td class="td2"></td>
+            <td class="td3"></td>
+        </tr>
+    </table>
+    <button onclick="rowadd()">Row Incremnet</button>
+    <button onclick="delrow()">Delete Row</button>
+    <script>
+        let c = document.getElementById('r2').rowIndex + 1;
+        var del1 = 4;
+        // for adding row
+        function rowadd() {
+            let w = document.getElementById('myTable').rows[0].cells.length;
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(c);
+            c++;
+            for (let i = 0; i < w; i++) {
+                var cell = row.insertCell(i);
+            }
+        }
+        
+        // for deleting row
+        
+        function delrow() {
+            if(c==1){
+                return false;
+            }
+            document.getElementById("myTable").deleteRow(c - 1);
+            c--;
+        }
+
+        // for adding column
+        
+        function addcol() {
+            let test = document.querySelectorAll("tr");
+            for (let j = 0; j < test.length; j++) {
+                var cell = document.createElement("td")
+                // cell.innerHTML = "KK";
+                test[j].appendChild(cell);
+                
+            }
+        }
+
+        
+        // Deleteing column
+        
+        function coldel() {
+            let w = document.getElementById('myTable').rows[0].cells.length;
+            let cldl = document.querySelectorAll("tr");
+
+            if(w==1){
+                return false;
+            }
+
+            for(let x= 0; x< cldl.length; x++)
+            {   
+                cldl[x].deleteCell(-1);
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+
+</html>

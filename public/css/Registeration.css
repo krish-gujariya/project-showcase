@@ -1,0 +1,184 @@
+*{
+    padding: 0;
+    margin: 0%;
+}
+
+
+h2{
+    font-size: 35px;
+    margin: 20px;
+}
+
+
+
+html,body,.form{
+    height: 100%;
+}
+
+
+
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../imags/peakpx.jpg) ;
+    background-size: 100% 100%;
+    padding: 32px;
+    color: white;
+}
+form input[type=text], input[type=password]{
+    padding: 5px 0 5px 20px;
+    width: 250px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid;
+    color: white;
+    background-color: transparent;
+    border-radius: 30px;
+    font-size: 20px;
+}
+
+form ::placeholder{
+    color: white;
+
+}
+
+label{
+    display: block;
+    margin-bottom: 5px;
+    padding: 0 20px;
+}
+
+
+.failure-icon, .error{
+    color: red;
+}
+
+.success-icon{
+    color: greenyellow;
+}
+
+.error{
+    font-size: 20px;
+    margin-top: 5px;
+    padding-left: 25px;
+}
+
+
+.success-icon,.failure-icon {
+    right: 0;
+    opacity: 0;
+}
+
+
+.box {
+    display: flex;
+    flex-direction: column;
+    row-gap: 11px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 10px white;
+    width: fit-content;
+    margin: auto;
+    padding: 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(8px);
+  }
+
+  #activate button{
+    padding: 8px 15px;
+    font-size: 19px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    border-radius: 20px;
+    width:270px ;
+    margin: auto;
+  }
+  #activate {
+    display: flex;
+    column-gap: 15px;
+    margin: 15px auto 0 auto;
+    width: 380px;
+    justify-content: center;
+    flex-direction: column;
+
+  }
+
+  #activate a {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    border: 1px solid;
+    padding: 5px 10px;
+    border-radius: 20px;
+    width: 60px;
+    display: inline-block;
+    background-color: aliceblue;
+    text-align: center;
+    margin: auto;
+}
+
+  #activate p{
+    font-size: 20px;
+    text-align: center;
+  }
+
+.box div{
+    position: relative;
+    flex-shrink: 0;
+}
+
+.box div i {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 20px;
+}
+
+
+.box a{
+    color: black;
+    text-decoration: none;
+    font-size: 19px;
+    border: 1px solid;
+    padding: 5px 10px;
+    border-radius: 20px;
+    width: 90px;
+    display: inline-block;
+    background-color: aliceblue;
+    text-align: center;
+    margin: auto;
+}
+ 
+#submit{
+    display: flex;
+    flex-direction: column;
+}
+
+
+button#submit-btn {
+    padding: 8px 16px;
+    border: 1px solid;
+    border-radius: 20px;
+    font-size: 17px;
+}
+
+
+.forgot {
+    width: -webkit-fill-available;
+}
+
+
+.forgot a {
+    padding: 9px;
+    width: fit-content;
+    background-color: transparent;
+    border: 0;
+    color: cornsilk;
+    font-size: 19px;
+    text-align: right;
+    text-decoration: underline;
+}
+
