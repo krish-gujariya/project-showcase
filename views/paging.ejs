@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        table, td ,th{
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+        td,th{
+            padding: 7px;
+        }
+        table{
+            margin: auto;
+        }
+        .nav ,.box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav{
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 10px 30px;
+            border: 1px solid;
+            background: black;
+            color: white;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: black;
+            border: 1px solid;
+            padding: 5px 10px;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        .nav a:hover{
+            background-color: #aaa1a1;
+        }
+
+       
+        th a{
+            text-decoration: none;
+            color: black;
+
+        }
+        th a:visited{
+            color: black;
+        }
+        th{
+            background-color: antiquewhite;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="box">
+            
+            <a href="http://localhost:8080/list?page=1&values= <%= value %>"><<</a>
+            <a href="/list?page=<%=--init; %>&values=<%= value %>" <% if (init==0) { %>
+             style = "pointer-events: none;
+             cursor: default;"
+            <% } %> ><</a>
+            <p><%= ++init; %>/<%= Math.ceil(Count/200) %></p>
+            <a href="/list?page=<%= ++init; %>&values=<%= value %>"<% if (init==251) { %>
+                style = "pointer-events: none;
+                cursor: default;"
+            <% } %>>></a>
+            <a href="http://localhost:8080/list?page=250&values=<%= value %>">>></a>
+        </div>
+        <div class="total">
+            <p>Total number of records are :- <%= Count %></p>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <th><a href="/list?page=1&values=Student_id" >Student id</a></th>
+            <th><a href="/list?page=1&values=fname" >First Name</a></th>
+            <th><a href="/list?page=1&values=lname">Last Name</a></th>
+            <th><a href="/list?page=1&values=gender">Gender</a></th>
+            <th><a href="/list?page=1&values=email">Email</a></th>
+            <th><a href="/list?page=1&values=phone_no">Phone no.</a></th>
+            <th><a href="/list?page=1&values=dept_name">Department Name</a></th>
+            <th><a href="/list?page=1&values=addressline1">Address Line 1</a></th>
+            <th><a href="/list?page=1&values=addressline2">Address Line 2</a></th>
+            <th><a href="/list?page=1&values=city">City</a></th>
+            <th><a href="/list?page=1&values=state">State</a></th>
+        </tr>
+
+        <% Data.forEach(element => { %>
+         <tr>
+            <td><%= element.Student_id %></td>
+            <td><%= element.fname %></td>
+            <td><%= element.lname %></td>
+            <td><%= element.gender %></td>
+            <td><%= element.email %></td>
+            <td><%= element.phone_no %></td>
+            <td><%= element.dept_name %></td>
+            <td><%= element.addressline1 %></td>
+            <td><%= element.addressline2 %></td>
+            <td><%= element.city %></td>
+            <td><%= element.state %></td>
+         </tr>
+        <% }) %>
+
+    </table>
+</body>
+</html>

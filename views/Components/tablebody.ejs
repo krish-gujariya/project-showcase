@@ -1,0 +1,9 @@
+   
+
+    <% Data.forEach(obj => { %>
+        <tr>
+            <% Property.forEach(element => { %>
+             <td><%= obj[element] %></td>
+            <% }) %>
+        </tr>
+    <% }) %>

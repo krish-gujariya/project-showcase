@@ -149,6 +149,21 @@ const domevent = (req,res)=>{
 const tictactoe = (req,res)=>{
   res.render("tictactoe.ejs")
 }
+const sort = (req,res)=>{
+  res.render("sorting.ejs")
+}
+
+const ehya = (req,res)=>{
+  res.render("ehya.ejs")
+}
+
+const awan = (req,res)=>{
+  res.render("awan.ejs")
+}
+
+const hirex = (req,res)=>{
+  res.render("hirex.ejs")
+}
 
 module.exports = {
   registrationpage,
@@ -161,5 +176,9 @@ module.exports = {
   dynamictable,
   kukukube,
   domevent,
-  tictactoe
+  tictactoe,
+  sort,
+  ehya,
+  awan,
+  hirex
 };

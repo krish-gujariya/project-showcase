@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/Result.css">
+</head>
+<body>
+    <h3>Students Result Records</h3>
+    
+    <div class="container">
+        <div class="nav">
+            <div class="box">
+                
+                <a href="/result-list?page=1"><<</a>
+                <a href="/result-list?page=<%=--init; %>" <% if (init==0) { %>
+                 style = "pointer-events: none;
+                 cursor: default;"
+                <% } %> ><</a>
+                <p><%= ++init; %>/<%= Math.ceil(Count/200) %></p>
+                <a href="/result-list?page=<%= ++init; %>"<% if (init==251) { %>
+                    style = "pointer-events: none;
+                    cursor: default;"
+                <% } %>>></a>
+                <a href="/result-list?page=250">>></a>
+            </div>
+            
+            <div class="total">
+                <p>Total number of records are :- <%= Count %></p>
+            </div>
+        </div>
+        <table border="1px solid">
+            <tr>
+                <th rowspan="2">Roll no.</th>
+                <th rowspan="2" >Student Name</th>
+                <th colspan="2">Terminal Exam</th>
+                <th colspan="2">Prelim Exam</th>
+                <th colspan="2">Final Exam</th>
+                <th rowspan="2">Total</th>
+                <th rowspan="2">Out of</th>
+                <th rowspan="2">Percentage</th>
+                <th rowspan="2">Result</th>
+            </tr>
+            <tr>
+                <th>Practical Marks</th>
+                <th>Theory Marks</th>
+                <th>Practical Marks</th>
+                <th>Theory Marks</th>
+                <th>Practical Marks</th>
+                <th>Theory Marks</th>
+            </tr>
+    
+            <% Data.forEach(element => { %>
+             
+                <tr>
+                <td><%= element.rollno %></td>
+                <td><%= element.fname %></td>
+                <td><%= element.terprac %></td>
+                <td><%= element.tertheor %></td>
+                <td><%= element.preprac %></td>
+                <td><%= element.pretheor %></td>
+                <td><%= element.finprac %></td>
+                <td><%= element.fintheor %></td>
+                <td><%= element.Obtotal %></td>
+                <td><%= element.otf %></td>
+                <td><%= element.percent %>%</td>
+                <td><a href="/student-result?value=<%= element.rollno %>" target="_blank">View Result</a></td>
+            </tr>
+            <% }) %>
+        </table>
+    </div>
+</body>
+</html>

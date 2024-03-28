@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/marksheet.css">
+    <link rel="stylesheet" href="css/Result.css">
+
+</head>
+<body>
+    <div class="mark">
+        <h3>Marksheet</h3>
+
+        <div class="card">
+            <div class="row">
+                <p>Name:- </p>
+                <p><%= Info.fname %> <%= Info.lname %></p>
+            </div>
+            <div class="row">
+                <p>Roll no:- </p>
+                <p><%= roll %></p>
+            </div>
+            <div class="row">
+                <p>Department:-</p>
+                <p><%= Info.dept_name %></p>
+            </div>
+            <div class="row">
+                <p>Attendance:-</p>
+                <p><%= perc.Percentage %> %</p>
+            </div>
+        </div>
+        <table >
+            <tr>
+                <th rowspan="2">No.</th>
+                <th rowspan="2">Subject Name</th>
+                <th colspan="2">Terminal</th>
+                <th colspan="2">Prelim</th>
+                <th colspan="2">Final</th>
+                <th rowspan="2">Total</th>
+                <th rowspan="2">Out Of</th>
+            </tr>
+            <tr>
+                <th>Practical Marks</th>
+                <th>Theory Marks</th>
+                <th>Practical Marks</th>
+                <th>Theory Marks</th>
+                <th>Practical Marks</th>
+                <th>Theory Marks</th>
+            </tr>
+
+            <% Data.forEach(element => { %>
+                <tr>
+                    <td><%= element.Subject_id  %></td>
+                    <td><%= element.Subject_name  %></td>
+                    <td><%= element.terprac  %></td>
+                    <td><%= element.tertheor  %></td>
+                    <td><%= element.preprac  %></td>
+                    <td><%= element.pretheor  %></td>
+                    <td><%= element.finprac  %></td>
+                    <td><%= element.fintheor  %></td>
+                    <td><%= element.Obtotal  %></td>
+                    <td><%= element.otf  %></td>
+                </tr>
+            <% }) %>
+            <tr>
+                <td class="gdtotl" colspan="8">Grand Total:-</td>
+                <td><%= Info.Obtotal %></td>
+                <td><%= Info.otf %></td>
+            </tr>
+            <tr>
+                <td class="gdtotl" colspan="9">Percentage:- </td>
+                <td><%= Info.percent %> %</td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+</html>

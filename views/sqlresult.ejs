@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/sqldata.css" />
+  </head>
+  <body>
+    <h3>Dynamic Sql querry generation</h3>
+    <div class="container">
+      <div class="box">
+        <form action="/sql-list?pg=1" method="post" >
+          <input type="text" name="querry" value="<%= value %>" />
+          <input type="submit" value="SUBMIT" />
+          <link rel="stylesheet" href="./Components/tableheading.ejs">
+        </form>
+      </div>
+      <div class="box">
+        <% if (pos==0) { %> 
+        <% } else if (select == true) { %>
+        <% } else if (!success) { %>
+        <% } else { %> 
+        <%- include('./Components/paggination.ejs') %> <% } %>
+      </div>
+      <div class="box">
+        <% if (pos==0) { %>
+       <% } else if (select == true) { %>
+        <p>Only Select Query is allowed</p>
+        <% } else if (!success) { %>
+          <p><%= errmessage %></p>
+        <% } else { %>
+        <table>
+          <%- include('./Components/tableheading.ejs') %> 
+          <%- include('./Components/tablebody.ejs') %> 
+        </table>
+          <% } %>
+      </div>
+    </div>
+
+
+  </body>
+</html>

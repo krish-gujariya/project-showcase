@@ -1,0 +1,20 @@
+<div class="nav">
+    <div class="box">
+        
+        <a href="/sql-list?pg=1"><<</a>
+        <a href="/sql-list?pg=<%=--init; %>" <% if (init==0) { %>
+         style = "pointer-events: none;
+         cursor: default;"
+        <% } %> ><</a>
+        <p><%= ++init; %>/<%= Math.ceil(Count/20) %></p>
+        <a href="/sql-list?pg=<%= ++init; %>"<% if (init==(Math.ceil(Count/20)+1)) { %>
+            style = "pointer-events: none;
+            cursor: default;"
+        <% } %>>></a>
+        <a href="/sql-list?pg=<%= Math.ceil(Count/20) %>">>></a>
+    </div>
+    
+    <div class="total">
+        <p>Total number of records are :- <%= Count %></p>
+    </div>
+</div>  
