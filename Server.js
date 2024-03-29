@@ -7,6 +7,9 @@ const paging = require("./controller/Paggination");
 const result = require("./controller/resultcontrol");
 const attendance = require("./controller/attendance-controll");
 const sql = require("./controller/sqlquerry-controll");
+const sort = require("./controller/sorting-record");
+const search = require("./controller/searchingdata-controll");
+const delimeter = require("./controller/delimeter-search");
 
 app.set("view engine", "ejs");
 app.use(exp.static('views'));
@@ -66,6 +69,24 @@ app.get("/sqlquerry", sql.first);
 app.post("/sql-list", sql.list);
 
 app.get("/sql-list", sql.getlist);
+
+app.get("/sql-sorting", sort.first);
+
+app.get("/sorting-list", sort.list);
+
+app.get("/searching-data", search.first);
+
+app.get("/search-list", search.list);
+
+app.post("/search-list", search.postlist);
+
+app.get("/delimeter-search", delimeter.first);
+
+app.get("/delimeter-list", delimeter.list);
+
+app.post("/delimeter-list", delimeter.postlist);
+
+app.get("/fetch-api", controls.fetch);
 
 
 app.listen(8000);

@@ -165,6 +165,10 @@ const hirex = (req,res)=>{
   res.render("hirex.ejs")
 }
 
+const fetch = (req,res)=>{
+  res.render("jsondata");
+}
+
 module.exports = {
   registrationpage,
   datainsertion,
@@ -180,5 +184,6 @@ module.exports = {
   sort,
   ehya,
   awan,
-  hirex
+  hirex,
+  fetch
 };

@@ -68,7 +68,7 @@
     <div class="nav">
         <div class="box">
             
-            <a href="http://localhost:8080/list?page=1&values= <%= value %>"><<</a>
+            <a href="/list?page=1&values=<%= value %>"><<</a>
             <a href="/list?page=<%=--init; %>&values=<%= value %>" <% if (init==0) { %>
              style = "pointer-events: none;
              cursor: default;"
@@ -78,7 +78,7 @@
                 style = "pointer-events: none;
                 cursor: default;"
             <% } %>>></a>
-            <a href="http://localhost:8080/list?page=250&values=<%= value %>">>></a>
+            <a href="/list?page=250&values=<%= value %>">>></a>
         </div>
         <div class="total">
             <p>Total number of records are :- <%= Count %></p>

@@ -1,0 +1,15 @@
+<tr>
+    <% Property.forEach(element => { %>
+        <th><a href="/sorting-list?pg=1&order=<%= element %>&asc=<% if (element == prop && asc ==0) { %>1
+        <% } else { %>0<% } %>"><%= element %></a>
+            
+         <% if (element == prop && asc ==0) { %>
+            <i class="fa-regular fa-square-caret-up down"></i>
+            
+            <% } else { %>
+                <i class="fa-regular fa-square-caret-up"></i>
+            <% } %>
+        </th>
+    <% }) %>
+</tr>
+

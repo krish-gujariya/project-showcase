@@ -1,0 +1,76 @@
+.down{
+    
+    transform: rotate(180deg);
+}
+
+
+th a{
+    text-decoration: none;
+    color: black;
+
+}
+
+th a:hover{
+    color: rgba(0, 0, 0, 0.603);
+}
+
+
+table, td ,th{
+    border: 1px solid;
+    border-collapse: collapse;
+    text-align: center  ;
+}
+.nav ,.box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.nav{
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 60em;
+}
+.nav a{
+    text-decoration: none;
+    color: black;
+    border: 1px solid;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: #c7bbbb;
+}
+.nav a:hover{
+    background-color: #9b9797;
+}
+.box{
+    display: flex;
+    align-items: baseline;
+}
+th a{
+    text-decoration: none;
+    color: black;
+
+}
+th a:visited{
+    color: black;
+}
+th{
+    background-color: antiquewhite;
+}
+th,td{
+    padding: 7px 15px;
+}
+.hsd:hover{
+    background-color: blue;
+    color: white;
+}
+h1{
+    text-align: center;
+}
+table,.nav{
+    margin: auto;
+}
+
+.dropdown{
+    margin: 15px auto;
+    width: fit-content;
+}
