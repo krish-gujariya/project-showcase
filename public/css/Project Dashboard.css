@@ -135,5 +135,10 @@ hr{
     border: 1px solid;
     padding: 5px 10px;
     border-radius: 15px;
-    background-color: #b1b1b1;
+    background-color: #9b9b9b;
+}
+
+.navigate a:hover {
+    background-color: #d3c7c7;
+
 }
