@@ -57,7 +57,14 @@ async function finduser(username){
         const conn = await database.createconnection();
         let data = await conn.query(sql,[username]);
         if(data[0].length){
-            return {success:true, credential:data[0][0]}
+            if(data[0][0].hashpassword){
+                
+                return {success:true, credential:data[0][0]}
+            }
+            else{
+                return{success:false}
+
+            }
         }
         else{
             return{success:false}
