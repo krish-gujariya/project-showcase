@@ -5,7 +5,7 @@ function connection() {
     host: "localhost",
     user: "root",
     password: "root",
-    database: "Student_Info",
+    database: "userlogin",
   });
   const myPromiseQuery = promisify(conn.query).bind(conn);
   conn.connect((err) => {
