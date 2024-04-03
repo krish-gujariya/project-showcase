@@ -4,7 +4,7 @@ const counts = require("../models/attendancedb");
 const first = (req,res)=>{
     dbms.fetchdata(0).then((data)=>{
         counts.counts().then((data1)=>{
-            let num = data1[0].count;
+            let num = data1.count;
             if(data.success){
                 
                 res.render('delimetersearch',{
@@ -55,7 +55,7 @@ const list = (req,res)=>{
             counts.counts().then((data1)=>{
                 
                 if(data.success){
-                    let num = data1[0].count
+                    let num = data1.count
                     res.render('delimetersearch',{
                         Property:data.property,
                         Data:data.record,
