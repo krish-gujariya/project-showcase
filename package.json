@@ -4,7 +4,6 @@
   "description": "",
   "main": "Server.js",
   "scripts": {
-<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,15 +17,4 @@
   },
   "homepage": "https://github.com/krish-gujariya/project-showcase#readme"
  
-=======
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.1.1"
-  }
->>>>>>> b905051720dded7663bd27c0478b47dfb396cf87
 }
