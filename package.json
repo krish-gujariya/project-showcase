@@ -1,0 +1,20 @@
+{
+  "name": "project-showcase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krish-gujariya/project-showcase.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krish-gujariya/project-showcase/issues"
+  },
+  "homepage": "https://github.com/krish-gujariya/project-showcase#readme"
+ 
+}
