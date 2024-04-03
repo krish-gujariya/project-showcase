@@ -15,9 +15,9 @@ const first  = (req,res)=>{
         dbms.counts().then((data2)=>{
             let count1 = data2[0].count;
             res.render('attendance',{Data:data, Count:count1, init:x, value:month, year:year, month:months});
-        })
+        }).catch(err=>{console.log(err);})
 
-    })
+    }).catch(err=>{console.log(err);})
     
     };
 
@@ -31,8 +31,8 @@ const list = (req,res)=>{
         dbms.counts().then((data2)=>{
             let count1 = data2[0].count;
             res.render('attendance',{Data:data, Count:count1, init:page , value:month ,year:year, month:months});
-        })
-    })
+        }).catch(err=>{console.log(err);})
+    }).catch(err=>{console.log(err);})
     
 
     }

@@ -13,8 +13,8 @@ const first = (req, res) => {
           Count: count1,
           init: x,
         });
-      });
-    });
+      }).catch((err)=>{console.log(err);});
+    }).catch((err)=>{console.log(err);});
   }
 
 
@@ -30,8 +30,8 @@ const list = (req, res) => {
           Count: count1,
           init: page,
         });
-      });
-    });
+      }).catch((err)=>{console.log(err);});
+    }).catch((err)=>{console.log(err);});
   }
 
 const result = (req,res)=>{
@@ -46,9 +46,9 @@ const result = (req,res)=>{
                     roll:val,
                     perc:data3[0]
                 })
-            })
-        })
-    })
+            }).catch((err)=>{console.log(err);})
+        }).catch((err)=>{console.log(err);})
+    }).catch((err)=>{console.log(err);})
 }
 
   module.exports ={

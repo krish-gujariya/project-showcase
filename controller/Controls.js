@@ -22,7 +22,6 @@ const datainsertion = (req, res) => {
           const expdate = Date.now() + 6000;
           let conn = await dbms.createconnection();
           let uactive = active.id + buff.toString("hex");
-          console.log(uactive);
           let sql = `Update users set activationcode = ?, expires =? where id = ? ;`;
           await conn.query(sql, [uactive, expdate, active.id]);
           var link = `http://localhost:8000/activate?code=${uactive}`;
@@ -50,11 +49,9 @@ const datainsertion = (req, res) => {
 
       crypto.randomBytes(10, async (err, buff) => {
         let uactive = id + buff.toString("hex");
-        console.log(uactive);
         let sql = `Update users set activationcode = ? where id = ? ;`;
         await conn.query(sql, [uactive, id]);
         var link = `http://localhost:8000/activate?code=${uactive}`;
-        console.log(link);
         res.json({ link: link });
       });
     } catch (error) {
@@ -114,11 +111,9 @@ const verifyuser = (req, res) => {
   verifies();
   async function verifies() {
     const data = await ucheck.finduser(uname);
-    console.log(data);
     if (data.success) {
       let cred = data.credential;
       let asdf = bcrypt.hashSync(password, cred.salt);
-      console.log(password, asdf);
       if (asdf == cred.hashpassword) {
        res.json({ success: true});
       } else {
@@ -131,9 +126,7 @@ const verifyuser = (req, res) => {
 };
 
 const dashboard = (req, res) => {
-  const token =  req.cookie;
-  console.log(token);
-  res.render("dashboard.ejs");
+res.render("dashboard.ejs");
 };
 
 const dynamictable = (req,res)=>{

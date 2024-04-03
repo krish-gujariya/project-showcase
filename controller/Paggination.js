@@ -9,8 +9,8 @@ const first = (req,res)=>{
         dbms.counts().then((data2)=>{
             let count1 = data2[0].count;
             res.render('paging',{Data:data, Count:count1, init:page , value:cnd});
-        })
-    })
+        }).catch((err)=>{console.log(err);})
+    }).catch((err)=>{console.log(err);})
 }
 
 
@@ -24,8 +24,8 @@ const pagginate = (req,res)=>{
         dbms.counts().then((data2)=>{
             let count1 = data2[0].count;
             res.render('paging',{Data:data, Count:count1, init:page , value:cnd});
-        })
-    })
+        }).catch((err)=>{console.log(err);})
+    }).catch((err)=>{console.log(err);})
     
 
     }

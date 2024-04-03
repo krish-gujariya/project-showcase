@@ -30,8 +30,8 @@ const first = (req,res)=>{
             else{
                 console.log(data.message);
             }
-        });
-    });
+        }).catch((err)=>{console.log(err);});
+    }).catch((err)=>{console.log(err);});
 
 
 }
@@ -84,8 +84,8 @@ const list =(req,res)=>{
             else{
                 console.log(data.message);
             }
-        })
-    })
+        }).catch((err)=>{console.log(err);});
+    }).catch((err)=>{console.log(err);});
 }
 
 module.exports ={first,list}

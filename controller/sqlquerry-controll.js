@@ -58,7 +58,7 @@ const list = (req, res) => {
               errmessage: w,
             });
           }
-          });
+          }).catch((err)=>{console.log(err);});
       })
       .catch((e) => {
         console.log(e);
@@ -82,8 +82,8 @@ const list = (req, res) => {
           select: false,
           success: true,
         });
-      });
-    });
+      }).catch((err)=>{console.log(err);});
+    }).catch((err)=>{console.log(err);});
   }
 
 module.exports = {first, list, getlist}
