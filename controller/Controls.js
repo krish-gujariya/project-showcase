@@ -120,7 +120,7 @@ const verifyuser = (req, res) => {
       let asdf = bcrypt.hashSync(password, cred.salt);
       console.log(password, asdf);
       if (asdf == cred.hashpassword) {
-        res.json({ success: true });
+       res.json({ success: true});
       } else {
         res.json({ success: false });
       }
@@ -131,6 +131,8 @@ const verifyuser = (req, res) => {
 };
 
 const dashboard = (req, res) => {
+  const token =  req.cookie;
+  console.log(token);
   res.render("dashboard.ejs");
 };
 
