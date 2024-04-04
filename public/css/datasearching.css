@@ -130,3 +130,17 @@ table,.nav{
     margin: auto;
 }
 
+.cells{
+    display: flex;
+    justify-content: center;
+
+}
+
+.cell1 {
+    padding: 7px 10px;
+    margin: 1px 0 0 1px;
+    outline: 1px solid;
+    font-size: 18px;
+    font-weight: bold;
+    background: antiquewhite;
+}
