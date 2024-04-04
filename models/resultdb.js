@@ -2,21 +2,14 @@ let mysql = require('mysql');
 let fs = require('fs');
 const { resolve } = require('path');
 const { rejects } = require('assert');
+const mysql1 = require("./studentdb-connection");
 
-conn = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password:"root",
-    database: "Student_Info"
-})
-
-conn.connect((err)=>{
-    if(err) console.log(err);
-})
+const {conn, prom} =  mysql1.connection();
 
 
-async function Record(number){
-    let mp = async()=> new Promise((resolve, reject) => {
+
+
+async function RecordQuerry(number){
         
         sql =`Select 
         Result.Student_id as rollno, Student_Master.fname,
@@ -33,28 +26,24 @@ async function Record(number){
        ON
        Result.Student_id = Student_Master.Student_id
        group by Result.Student_id
-       LIMIT 200 offset ${number}
+       LIMIT 200 offset ?
        ;`
-        conn.query(sql,(err,data)=>{
-            if(err) console.log(err);
-            resolve(JSON.parse(JSON.stringify(data)));
-        })
+
+       try {
+           const result = await prom(sql, number);
+           const data = JSON.parse(JSON.stringify(result));
+           return {data:data, success:true};
         
-    })
-    let c = mp();
-    return c;
-}
+       } catch (error) {
+            console.log(error);
+            return {data:null, success:false};
+
+       }
+    }
 
 
 
-async function RecordQuerry(number){
-    let result = await Record(number);
-    return result;
-}
-
-
-async function Result(id){
-    let mp = async() =>  new Promise((resolve,reject)=>{
+async function Resultdata(id){
         sql =`
         Select 
          Result.Subject_id, Subject.Subject_name,
@@ -72,24 +61,21 @@ async function Result(id){
         where Result.Student_id = ?
         group by Result.Subject_id , Result.Student_id
         ;`;
-        conn.query(sql,id,(err,data)=>{
-            if(err) console.log(err);
-            resolve(JSON.parse(JSON.stringify(data)));
-        })
-    })
-    let c = mp();
-    return c;
+
+        
+        try {
+            const result= await prom(sql, [id]);
+            const data = JSON.parse(JSON.stringify(result));
+            return {success:true,data:data};
+        } catch (error) {
+            console.log(error);
+            return {success:false , data:null};
+            
+        }
 }
 
 
-
-async function Resultdata(id){
-    let data = await Result(id);
-    return data;
-}
-
-async function resgrade(id){
-    let mp = async() => new Promise((resolve,rejects)=>{
+async function grade(id){
         sql =`Select  Student_Master.fname, Student_Master.lname, Student_Master.dept_name,
        sum(pracmark + ThMark) as Obtotal,
        sum(totalpracmark+ totalthmark) as otf,
@@ -100,42 +86,39 @@ async function resgrade(id){
        where Result.Student_id =?
        group by Result.Student_id
        ;`;
-
-       conn.query(sql,id,(err,data)=>{
-        if(err) console.log(err);
-        resolve(JSON.parse(JSON.stringify(data)));
-       })
-    })
-    let c = mp();
-    return c;
+          
+       try {
+        const result= await prom(sql, [id]);
+        const data = JSON.parse(JSON.stringify(result));
+        return {success:true,data:data};
+    } catch (error) {
+        console.log(error);
+        return {success:false , data:null};
+        
+    }
 }
 
-async function grade(id){
-    let data = await resgrade(id);
-    return data; 
-}
 
-async function Attendance(number){
-    let mp = async()=> new Promise((resolve, reject) => {
+async function Attenper(number){
         
         sql =`Select ROUND((count(Attendance1.PA1)*100/90),2) as Percentage
         FROM Attendance1 LEFT JOIN Student_Master 
         ON
         Attendance1.Student_Id = Student_Master.Student_Id
         WHERE PA1 = 1 and Student_Master.Student_Id =?`;
-        conn.query(sql,number,(err,data)=>{
-            if(err) console.log(err);
-            resolve(JSON.parse(JSON.stringify(data)));
-        })
         
-    })
-    let c = mp();
-    return c;
-}
+             
+       try {
+        const result= await prom(sql, [number]);
+        const data = JSON.parse(JSON.stringify(result));
+        return {success:true,data:data};
+    } catch (error) {
+        console.log(error);
+        return {success:false , data:null};
+        
+    }
 
-async function Attenper(number){
-    let result = await Attendance(number);
-    return result;
+       
 }
 
 
