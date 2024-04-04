@@ -12,7 +12,7 @@ const first = (req, res) => {
       select: false,
     });   
 };
-
+let ab;
 const list = (req, res) => {
     let x = (req.query.pg - 1) * 20;
     let page = req.query.pg;
@@ -27,63 +27,83 @@ const list = (req, res) => {
       });
       return 0;
     }
-    dbms
-      .RecordQuerry(ab, x)
-      .then((data) => {
-          dbms.counts(ab).then((data1) => {
-              if (data1.success) {
-            let num = data1.data;
-            res.render("sqlresult", {
-              Data: data.data.students,
-              Property: data.data.props,
-              init: page,
-              Count: num[0].count,
-              value: ab,
-              pos: 1,
-              select: false,
-              success: true,
-            });
-          } else {
-              let w = data.data;
-              if(w.match(/You have an error in your SQL syntax/i)){
-                  w = 'You have error in sql syntax';
-              }
+
+    try {
+      sqldata();
+    } catch (error) {
+      console.log(error);
+    }
+
+    async function sqldata(){
+        const data = await dbms.RecordQuerry(ab,x);
+        const count = await dbms.counts(ab);
+        if(count.success){
+          res.render("sqlresult", {
+                      Data: data.data,
+                      Property: data.prop,
+                      init: page,
+                      Count: count.count,
+                      value: ab,
+                      pos: 1,
+                      select: false,
+                      success: true,
+                    });
+        }
+        else{
+          let error = count.count;
+                    if(error.match(/You have an error in your SQL syntax/i)){
+                        error = 'You have error in sql syntax';
+                    }
+
             res.render("sqlresult", {
               init: 0,
               Count: 0,
-              success: data.success,
+              success: count.success,
               pos: 1,
               select: false,
               value: "",
-              errmessage: w,
+              errmessage: error,
             });
-          }
-          }).catch((err)=>{console.log(err);});
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+        }
+    }
+
   }
 
 
   const getlist = (req, res) => {
     let x = (req.query.pg - 1) * 20;
     let page = req.query.pg;
-    dbms.RecordQuerry(ab, x).then((data) => {
-      dbms.counts(ab).then((data1) => {
-        let num = data1.data;
+   
+    try {
+      
+      sqldata();
+    } catch (error) {
+      res.send("data not found")
+      console.log(error);
+    }
+
+    async function sqldata(){
+      const data = await dbms.RecordQuerry(ab,x);
+      const count = await dbms.counts(ab);
+      if(count.success){
+        
         res.render("sqlresult", {
-          Data: data.data.students,
-          Property: data.data.props,
+          Data: data.data,
+          Property: data.prop,
           init: page,
-          Count: num[0].count,
+          Count: count.count,
           value: ab,
           pos: 1,
           select: false,
           success: true,
         });
-      }).catch((err)=>{console.log(err);});
-    }).catch((err)=>{console.log(err);});
+
+      }
+      else{
+        res.send("data not found");
+      }
+    }
+  
   }
 
 module.exports = {first, list, getlist}

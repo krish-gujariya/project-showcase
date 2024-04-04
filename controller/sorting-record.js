@@ -11,15 +11,24 @@ let asdes = ['asc', 'desc'];
 
 const first = (req,res)=>{
 
-    dbms.Result(0,1,2024,'Student_Id asc').then((data)=>{
-        counts.counts().then((data1)=>{
-            let num = data1[0].count;
+
+    try {
+        resultdata();
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+    async function resultdata(){
+        const data = await dbms.Result(0,1,2024,'Student_Id asc');
+        const count = await counts.counts();
+
             if(data.success){
                 res.render('Student-record',{
                     Property:data.property,
                     Data:data.record,
                     init:1,
-                    Count:num,
+                    Count:count.count,
                     month: "December",
                     year:2023,
                     order:'Student_Id asc',
@@ -28,10 +37,10 @@ const first = (req,res)=>{
                 })
             }
             else{
-                console.log(data.message);
+                res.send("record not found");
             }
-        }).catch((err)=>{console.log(err);});
-    }).catch((err)=>{console.log(err);});
+    }
+
 
 
 }
@@ -66,26 +75,55 @@ const list =(req,res)=>{
         id = tempid;
      }
      let order1 = order + " "+ asdes[id];
-     dbms.Result(x,month,year, order1).then((data)=>{
-        counts.counts().then((data1)=>{
+    //  dbms.Result(x,month,year, order1).then((data)=>{
+    //     counts.counts().then((data1)=>{
+    //         if(data.success){
+    //         let num = data1[0].count;
+    //             res.render('Student-record',{
+    //                 Property: data.property,
+    //                 Data:data.record,
+    //                 init:page,
+    //                 Count:num,
+    //                 month: mon[month-1],
+    //                 year: year,
+    //                 prop:order,
+    //                 asc:id
+    //             })               
+    //         }
+    //         else{
+    //             console.log(data.message);
+    //         }
+    //     }).catch((err)=>{console.log(err);});
+    // }).catch((err)=>{console.log(err);});
+
+    try {
+        resultdata();
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+    async function resultdata(){
+        const data = await dbms.Result(x,month,year,order1);
+        const count = await counts.counts();
+
             if(data.success){
-            let num = data1[0].count;
                 res.render('Student-record',{
-                    Property: data.property,
+                    Property:data.property,
                     Data:data.record,
                     init:page,
-                    Count:num,
+                    Count:count.count,
                     month: mon[month-1],
-                    year: year,
+                    year:year,
                     prop:order,
                     asc:id
-                })               
+                })
             }
             else{
-                console.log(data.message);
+                res.send("record not found");
             }
-        }).catch((err)=>{console.log(err);});
-    }).catch((err)=>{console.log(err);});
+    }
+
 }
 
 module.exports ={first,list}

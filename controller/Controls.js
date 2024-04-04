@@ -1,9 +1,11 @@
-var dbms = require("../models/DbConnection");
+var dbms = require("../models/studentdb-connection");
 var ucheck = require("../models/usercheck");
 var bds = require("body-parser");
 var crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const salt = 10;
+
+const {conn ,prom } = dbms.connection();
 
 const registrationpage = (req, res) => {
   res.render("Registration", { link: "" });
@@ -20,10 +22,9 @@ const datainsertion = (req, res) => {
       try {
         crypto.randomBytes(10, async (err, buff) => {
           const expdate = Date.now() + 6000;
-          let conn = await dbms.createconnection();
           let uactive = active.id + buff.toString("hex");
           let sql = `Update users set activationcode = ?, expires =? where id = ? ;`;
-          await conn.query(sql, [uactive, expdate, active.id]);
+          await prom(sql,[uactive,expdate,active.id]);
           var link = `http://localhost:8000/activate?code=${uactive}`;
           res.json({ link: link, useractive: true });
         });
@@ -38,19 +39,19 @@ const datainsertion = (req, res) => {
   }
 
   async function insertdata() {
-    let conn = await dbms.createconnection();
     let links;
     const expdate = Date.now() + 6000;
     let sql = `Insert into users(fname,lname,email,phone,username,expires) values ?`;
     let values = [[fname, lname, email, phone, uname, expdate]];
     try {
-      let result = await conn.query(sql, [values]);
-      let id = result[0].insertId;
+      const data = await prom(sql, [values]);
+      let result = JSON.parse(JSON.stringify(data));
+      let id = result.insertId;
 
       crypto.randomBytes(10, async (err, buff) => {
         let uactive = id + buff.toString("hex");
         let sql = `Update users set activationcode = ? where id = ? ;`;
-        await conn.query(sql, [uactive, id]);
+        await prom(sql, [uactive, id]);
         var link = `http://localhost:8000/activate?code=${uactive}`;
         res.json({ link: link });
       });
@@ -67,9 +68,9 @@ const activateuser = (req, res) => {
 
   async function checkexpiers() {
     let sql = `select expires from users where activationcode =?`;
-    const conn = await dbms.createconnection();
-    let result = await conn.query(sql, code);
-    exptime = result[0][0].expires;
+    const data = await prom(sql, code);
+    let result = JSON.parse(JSON.stringify(data));
+    exptime = result[0].expires;
 
     if (Date.now() <= exptime) {
       res.render("password", { code: code });
@@ -89,9 +90,8 @@ const createpassword = (req, res) => {
     let saltc = bcrypt.genSaltSync(salt);
     let hashpassword = bcrypt.hashSync(password, saltc);
     let sql = `Update users set hashpassword = ?, salt =? where activationcode = ?`;
-    let conn = await dbms.createconnection();
     try {
-      await conn.query(sql, [hashpassword, saltc, code]);
+      await prom(sql, [hashpassword, saltc, code]);
     } catch (error) {
       console.log(error);
     }
