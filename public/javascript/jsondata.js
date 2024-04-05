@@ -118,11 +118,11 @@ async function searchdata(){
     let btn = document.querySelectorAll(".col button");
     let backbtn = document.querySelector("#goback");
     console.log(backbtn);
-    backbtn.style.visibility = "visible"
-
     btn.forEach(element => {
         element.style.visibility = "hidden"
     });
+    backbtn.style.visibility = "visible"
+
 
     trow.innerHTML = "";
     let html = "";
@@ -160,12 +160,13 @@ async function searchdata(){
 function goback(){
     let btn = document.querySelectorAll(".col button");
     let backbtn = document.querySelector("#goback");
-    backbtn.style.visibility = "hidden"
-
-
     btn.forEach(element => {
         element.style.visibility = "visible"
     });
+    
+    backbtn.style.visibility = "hidden"
+
+
     let inp  = document.getElementsByClassName("search");
     inp[0].value = "";
 
